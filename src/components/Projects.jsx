@@ -2,13 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
+import CampusConnectImg from "../assets/campus-connect.png";
+
 const projects = [
     {
         title: "Campus Connect",
         description: "A centralized platform for student discovery of clubs and events, built with Next.js.",
         tech: ["Next.js", "Tailwind", "Framer Motion"],
         github: "https://github.com/Maahi-0/Campus-Connect",
-        image: "https://images.unsplash.com/photo-1523050335102-c32509142279?auto=format&fit=crop&q=80&w=800",
+        image: CampusConnectImg,
     },
     {
         title: "Full-Stack Journey",
