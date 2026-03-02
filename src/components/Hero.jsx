@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import profileImg from "../assets/profile.png";
 
 const Hero = () => {
     return (
@@ -12,22 +11,6 @@ const Hero = () => {
                     transition={{ duration: 1, ease: "easeOut" }}
                     className="text-center max-w-4xl"
                 >
-                    {/* Optional Profile Image */}
-                    <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 1, delay: 0.2 }}
-                        className="mb-8 relative"
-                    >
-                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl mx-auto">
-                            <img
-                                src={profileImg}
-                                alt="Muskan Wagh"
-                                className="w-full h-full object-cover transition-all duration-500"
-                            />
-                        </div>
-                    </motion.div>
-
                     <h2 className="text-lg md:text-xl font-medium text-[var(--text-primary)] mb-4 tracking-tight">
                         Software Engineer & Full Stack Developer
                     </h2>
@@ -71,7 +54,7 @@ const Hero = () => {
                 <div className="w-[1px] h-20 bg-gradient-to-b from-[var(--text-secondary)] to-transparent" />
                 <span className="text-[10px] uppercase tracking-[0.5em] text-[var(--text-secondary)] font-bold">Scroll</span>
             </motion.div>
-        </section>
+        </section >
     );
 };
 
