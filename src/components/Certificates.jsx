@@ -1,79 +1,112 @@
 import React from "react";
 import { motion } from "framer-motion";
-import certMyCaptain from "../assets/cert-mycaptain.png";
-import certPregrad from "../assets/cert-pregrad.png";
-import certSIH from "../assets/cert-sih.png";
-import certCodingBlocks from "../assets/cert-codingblocks.png";
-import certGDGFounding from "../assets/cert-gdg-founding.png";
+import certMyCaptain    from "../assets/cert-mycaptain.webp";
+import certPregrad      from "../assets/cert-pregrad.webp";
+import certSIH          from "../assets/cert-sih.webp";
+import certCodingBlocks from "../assets/cert-codingblocks.webp";
+import certGDGFounding  from "../assets/cert-gdg-founding.webp";
 
 const certificates = [
     {
         title: "Founding Team Member",
         issuer: "GDG on Campus SUI Indore",
+        year: "2024 — 2025",
         image: certGDGFounding,
-        description: "Valued Founding Team Member (2024-2025).",
+        description: "Recognised as a valued Founding Team Member in the inaugural GDG on Campus chapter.",
     },
     {
         title: "Campus Ambassador",
         issuer: "MyCaptain",
+        year: "2025",
         image: certMyCaptain,
-        description: "Successfully completed program in Marketing.",
+        description: "Successfully completed the Campus Ambassador programme in Marketing.",
     },
     {
-        title: "Smart India Hackathon 2025",
+        title: "Smart India Hackathon",
         issuer: "SAGE University Indore",
+        year: "2025",
         image: certSIH,
-        description: "Showcasing technical creativity and teamwork.",
+        description: "Recognised for technical creativity and teamwork at SIH 2025.",
     },
     {
         title: "Full Stack Development",
         issuer: "Coding Blocks",
+        year: "2024",
         image: certCodingBlocks,
-        description: "Summer Training in Full Stack Engineering.",
+        description: "Summer training in full-stack engineering covering the MERN stack.",
+    },
+    {
+        title: "Campus Representative",
+        issuer: "Pregrad",
+        year: "2025",
+        image: certPregrad,
+        description: "Completed the Campus Ambassador Intern programme focused on student career acceleration.",
     },
 ];
 
 const Certificates = () => {
     return (
-        <section id="certificates" className="py-32 bg-[var(--bg-secondary)]">
-            <div className="container mx-auto px-6 max-w-6xl">
+        <section id="certificates" className="py-24 md:py-32 border-b border-[var(--line)]">
+            <div className="max-w-6xl mx-auto px-6 md:px-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-20"
+                    transition={{ duration: 0.6 }}
+                    className="mb-12 md:mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tighter text-[var(--text-primary)]">
-                        Professional <span className="text-[var(--text-primary)]">Certifications.</span>
-                    </h2>
-                    <p className="text-[var(--text-secondary)] text-lg font-light max-w-xl mx-auto">
-                        Validating my expertise through industry-recognized accomplishments.
+                    <div>
+                        <span className="section-label">03 — Certifications</span>
+                        <h2 className="section-title">
+                            Verified milestones
+                            <br />
+                            across communities.
+                        </h2>
+                    </div>
+                    <p className="text-sm leading-relaxed max-w-xs">
+                        Industry-recognised certifications validating my expertise and growth.
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
-                    {certificates.map((cert, index) => (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {certificates.map((cert, i) => (
                         <motion.div
-                            key={index}
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="group card-minimal overflow-hidden !p-0 border border-[var(--card-border)] bg-[var(--card-bg)]"
+                            transition={{ delay: i * 0.07, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                            className="paper-block group"
                         >
-                            <div className="aspect-[16/9] overflow-hidden bg-black/5 dark:bg-black/20 flex items-center justify-center p-8">
+                            <div
+                                className="aspect-[16/10] overflow-hidden flex items-center justify-center p-5"
+                                style={{ background: "var(--card-bg)" }}
+                            >
                                 <img
                                     src={cert.image}
                                     alt={cert.title}
-                                    className="max-w-full max-h-full object-contain transition-all duration-700"
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                                 />
                             </div>
-                            <div className="p-8">
-                                <span className="text-[var(--text-primary)] opacity-70 text-[10px] font-bold uppercase tracking-widest mb-2 block">{cert.issuer}</span>
-                                <h3 className="text-2xl font-bold mb-2 tracking-tight text-[var(--text-primary)]">
+
+                            <div className="p-5 border-t border-[var(--line)]">
+                                <div className="flex items-center justify-between mb-2">
+                                    <span className="meta-line" style={{ color: 'var(--accent)' }}>
+                                        {cert.issuer}
+                                    </span>
+                                    <span className="meta-line">
+                                        {cert.year}
+                                    </span>
+                                </div>
+                                <h3
+                                    className="text-3xl font-semibold mb-2"
+                                    style={{ fontFamily: "var(--font-serif)", color: "var(--text-primary)" }}
+                                >
                                     {cert.title}
                                 </h3>
-                                <p className="text-[var(--text-secondary)] text-sm font-light leading-relaxed">
+                                <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                                     {cert.description}
                                 </p>
                             </div>

@@ -1,125 +1,140 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+
+const navLinks = [
+    { name: "Work",       href: "#projects"   },
+    { name: "About",      href: "#about"       },
+    { name: "Experience", href: "#experience"  },
+    { name: "Skills",     href: "#skills"      },
+    { name: "Contact",    href: "#contact"     },
+];
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen,   setIsOpen]   = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+        let ticking = false;
+        const onScroll = () => {
+            if (ticking) {
+                return;
+            }
+            ticking = true;
+            window.requestAnimationFrame(() => {
+                setScrolled(window.scrollY > 40);
+                ticking = false;
+            });
         };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
-
-    const navLinks = [
-        { name: "Projects", href: "#projects" },
-        { name: "About me", href: "#about" },
-        { name: "Experience", href: "#experience" },
-        { name: "Skills", href: "#skills" },
-        { name: "Contact me", href: "#contact" },
-    ];
-
-    const socials = [
-        { icon: <FaGithub />, href: "https://github.com", label: "GitHub" },
-        { icon: <FaLinkedin />, href: "https://linkedin.com", label: "LinkedIn" },
-        { icon: <FaTwitter />, href: "https://twitter.com", label: "Twitter" },
-        { icon: <FaInstagram />, href: "https://instagram.com", label: "Instagram" },
-    ];
 
     return (
         <nav
-            className={`fixed w-full z-50 transition-all duration-500 ${scrolled
-                ? "bg-[var(--bg-primary)]/80 backdrop-blur-xl border-b border-[var(--card-border)] py-3"
-                : "bg-transparent py-6"}`}
+            className={`fixed w-full z-50 transition-all duration-300 ${
+                scrolled
+                    ? "bg-[var(--bg-primary)]/90 backdrop-blur-md border-b border-[var(--line)]"
+                    : "bg-transparent"
+            }`}
         >
-            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-                {/* Logo */}
-                <a href="#" className="text-xl font-bold tracking-tighter">
-                    MW<span className="text-[var(--text-primary)]">.</span>
+            <div className="max-w-6xl mx-auto px-6 md:px-10 h-[68px] flex items-center justify-between">
+                <a
+                    href="#"
+                    className="text-2xl md:text-3xl leading-none"
+                    style={{ fontFamily: "var(--font-serif)" }}
+                    aria-label="Go to top"
+                >
+                    Muskan <em className="not-italic" style={{ color: "var(--accent)" }}>Wagh</em>
                 </a>
 
-                {/* Desktop Center Links */}
-                <div className="hidden md:flex items-center gap-10">
-                    {navLinks.map((link) => (
+                <div className="hidden md:flex items-center gap-7">
+                    {navLinks.map((l) => (
                         <a
-                            key={link.name}
-                            href={link.href}
-                            className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-sm font-medium"
+                            key={l.name}
+                            href={l.href}
+                            className="text-[11px] uppercase tracking-[0.2em]"
+                            style={{ color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}
                         >
-                            {link.name}
+                            {l.name}
                         </a>
                     ))}
                 </div>
 
-                {/* Desktop Right Socials + Toggle */}
-                <div className="hidden md:flex items-center gap-6">
-                    <div className="flex items-center gap-4 border-r border-[var(--card-border)] pr-6">
-                        {socials.map((social, index) => (
-                            <a
-                                key={index}
-                                href={social.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-lg"
-                                aria-label={social.label}
-                            >
-                                {social.icon}
-                            </a>
-                        ))}
-                    </div>
+                <div className="hidden md:flex items-center gap-4">
+                    <a
+                        href="https://github.com/Maahi-0"
+                        target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub"
+                        className="transition-colors duration-200"
+                        style={{ color: "var(--text-secondary)" }}
+                    >
+                        <FaGithub size={15} />
+                    </a>
+                    <a
+                        href="https://linkedin.com"
+                        target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                        className="transition-colors duration-200"
+                        style={{ color: "var(--text-secondary)" }}
+                    >
+                        <FaLinkedin size={15} />
+                    </a>
+                    <div className="w-px h-4" style={{ background: "var(--line)" }} />
                     <ThemeToggle />
                 </div>
 
-                {/* Mobile Menu Button */}
-                <div className="flex items-center gap-4 md:hidden">
+                <div className="flex items-center gap-3 md:hidden">
                     <ThemeToggle />
                     <button
-                        className="text-[var(--text-primary)] focus:outline-none"
                         onClick={() => setIsOpen(!isOpen)}
+                        type="button"
+                        className="h-9 px-3 text-[10px] uppercase tracking-[0.2em] border border-[var(--line)]"
+                        style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}
+                        aria-label="Toggle menu"
+                        aria-expanded={isOpen}
+                        aria-controls="mobile-nav-menu"
                     >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            {isOpen ? (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-                            ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-                            )}
-                        </svg>
+                        {isOpen ? "Close" : "Menu"}
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
-            {isOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="md:hidden absolute top-full left-0 w-full bg-[var(--bg-primary)] border-b border-[var(--card-border)] shadow-xl"
-                >
-                    <div className="flex flex-col p-8 gap-6 text-center">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-lg font-medium"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                        <div className="flex justify-center gap-6 pt-4 border-t border-[var(--card-border)]">
-                            {socials.map((social, index) => (
-                                <a key={index} href={social.href} className="text-2xl text-[var(--text-secondary)]">
-                                    {social.icon}
-                                </a>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        key="mobile-menu"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.28, ease: "easeInOut" }}
+                        className="md:hidden overflow-hidden border-b border-[var(--line)] bg-[var(--paper)]"
+                        id="mobile-nav-menu"
+                    >
+                        <div className="px-6 pt-5 pb-7 flex flex-col gap-4">
+                            {navLinks.map((l, i) => (
+                                <motion.a
+                                    key={l.name}
+                                    href={l.href}
+                                    initial={{ opacity: 0, x: -8 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.04 }}
+                                    className="text-[11px] uppercase tracking-[0.24em] py-1"
+                                    style={{ fontFamily: "var(--font-mono)", color: "var(--text-primary)" }}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {l.name}
+                                </motion.a>
                             ))}
+                            <div className="flex gap-5 pt-3" style={{ borderTop: "1px solid var(--line)" }}>
+                                <a href="https://github.com/Maahi-0" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)" }}><FaGithub size={16} /></a>
+                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)" }}><FaLinkedin size={16} /></a>
+                            </div>
                         </div>
-                    </div>
-                </motion.div>
-            )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 };

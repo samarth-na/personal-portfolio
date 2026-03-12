@@ -1,60 +1,85 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 
 const Hero = () => {
     return (
-        <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden bg-wavy">
-            <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
+        <section className="relative min-h-screen pt-24 md:pt-28 pb-16 border-b border-[var(--line)]">
+            <div className="max-w-6xl mx-auto px-6 md:px-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="text-center max-w-4xl"
+                    transition={{ duration: 0.65, ease: "easeOut" }}
+                    className="meta-line mb-8 md:mb-14"
                 >
-                    <h2 className="text-lg md:text-xl font-medium text-[var(--text-primary)] mb-4 tracking-tight">
-                        Software Engineer & Full Stack Developer
-                    </h2>
+                    Issue 01 / Portfolio Chronicle / 2026 Edition
+                </motion.div>
 
-                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 text-[var(--text-primary)]">
-                        Muskan <br className="md:hidden" /> Wagh.
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <h1
+                        className="font-semibold leading-[0.86] text-[var(--text-primary)]"
+                        style={{
+                            fontFamily: 'var(--font-serif)',
+                            fontSize: 'clamp(3.7rem, 10vw, 8.8rem)',
+                        }}
+                    >
+                        Muskan<br />
+                        <span style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>Wagh.</span>
                     </h1>
+                </motion.div>
 
-                    <p className="text-xl md:text-2xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-                        Crafting intuitive digital experiences through clean code.
-                        Focused on building scalable web applications with Next.js.
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.75, delay: 0.3, ease: "easeOut" }}
+                    className="mt-10 md:mt-14 grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14"
+                >
+                    <p className="text-lg md:text-2xl leading-relaxed md:pr-10" style={{ fontFamily: 'var(--font-serif)' }}>
+                        Software engineer focused on meaningful products, clean interaction, and durable code.
+                        I build full-stack experiences with React, Next.js, Node.js, and thoughtful design systems.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                        <a
-                            href="#projects"
-                            className="group relative px-10 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium transition-all hover:scale-105 active:scale-95"
-                        >
-                            View Projects
-                        </a>
-                        <a
-                            href="#contact"
-                            className="px-10 py-4 border border-[var(--card-border)] text-[var(--text-primary)] rounded-full font-medium hover:bg-gray-50 dark:hover:bg-gray-900 transition-all active:scale-95"
-                        >
-                            Get in touch
-                        </a>
+                    <div className="paper-block p-6 md:p-7 flex flex-col gap-6">
+                        <p className="meta-line">Software Engineer / Full Stack Developer / Indore, India</p>
+                        <p className="text-sm leading-relaxed">
+                            Available for internships, freelance collaborations, and product engineering roles.
+                        </p>
+                        <div className="flex flex-wrap items-center gap-3">
+                            <a href="#projects" className="btn-primary">
+                                View Work <FaArrowRight size={10} />
+                            </a>
+                            <a href="#contact" className="btn-ghost">Say Hello</a>
+                        </div>
                     </div>
                 </motion.div>
-            </div>
-
-            {/* Subtle floating elements for a premium feel */}
-            <div className="absolute top-1/4 -left-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
 
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                transition={{ delay: 0.7, duration: 0.7 }}
+                className="mt-14 md:mt-20 pt-6 border-t border-[var(--line)] flex flex-col md:flex-row md:items-center md:justify-between gap-4"
             >
-                <div className="w-[1px] h-20 bg-gradient-to-b from-[var(--text-secondary)] to-transparent" />
-                <span className="text-[10px] uppercase tracking-[0.5em] text-[var(--text-secondary)] font-bold">Scroll</span>
+                <div className="meta-line flex items-center gap-5">
+                    <span>Based in India</span>
+                    <span>Open to Opportunities</span>
+                </div>
+                <div className="meta-line">Scroll and explore selected work</div>
             </motion.div>
-        </section >
+
+            <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.95, duration: 0.65 }}
+                className="pull-quote mt-16 text-2xl md:text-4xl max-w-3xl"
+            >
+                "Build with patience. Refine with intent. Ship with clarity."
+            </motion.p>
+            </div>
+        </section>
     );
 };
 

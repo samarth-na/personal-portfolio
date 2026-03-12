@@ -1,27 +1,31 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
-import Experience from "./components/Experience";
-import Certificates from "./components/Certificates";
-import Education from "./components/Education";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+
+const About = lazy(() => import("./components/About"));
+const Experience = lazy(() => import("./components/Experience"));
+const Certificates = lazy(() => import("./components/Certificates"));
+const Education = lazy(() => import("./components/Education"));
+const Skills = lazy(() => import("./components/Skills"));
+const Projects = lazy(() => import("./components/Projects"));
+const Contact = lazy(() => import("./components/Contact"));
+
 function App() {
   return (
-    <div className="min-h-screen transition-colors duration-300">
+    <div className="min-h-screen transition-colors duration-300 bg-[var(--bg-primary)]">
       <Navbar />
       <main className="relative">
         <Hero />
-        <About />
-        <Experience />
-        <Certificates />
-        <Education />
-        <Skills />
-        <Projects />
-        <Contact />
+        <Suspense fallback={null}>
+          <About />
+          <Experience />
+          <Certificates />
+          <Education />
+          <Skills />
+          <Projects />
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
     </div>

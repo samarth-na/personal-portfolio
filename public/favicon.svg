@@ -1,4 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#1e3a8a"/>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="50" font-weight="bold" fill="#ffffff">MS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="paper" x1="12" y1="8" x2="52" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F6F1" />
+      <stop offset="1" stop-color="#ECE8E0" />
+    </linearGradient>
+    <linearGradient id="ink" x1="22" y1="16" x2="43" y2="47" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#171512" />
+      <stop offset="1" stop-color="#2F5D50" />
+    </linearGradient>
+  </defs>
+  <rect x="5" y="5" width="54" height="54" rx="16" fill="url(#paper)" />
+  <rect x="5" y="5" width="54" height="54" rx="16" stroke="#D8D2C5" stroke-width="2" />
+  <path
+    d="M20 44V21L31.75 32.25L43.5 21V44"
+    stroke="url(#ink)"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path d="M19 49H45" stroke="#2F5D50" stroke-width="3" stroke-linecap="round" opacity="0.9" />
+  <circle cx="46.5" cy="18.5" r="4.5" fill="#2F5D50" />
 </svg>

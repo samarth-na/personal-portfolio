@@ -1,83 +1,152 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaChevronDown } from "react-icons/fa";
 
 const experiences = [
     {
         role: "Google Student Ambassador",
         company: "Google for Gemini",
-        period: "2025 - 2026",
+        period: "2025 — 2026",
         description: "Representing Google AI initiatives on campus, promoting Gemini and other AI tools, and facilitating AI-focused learning opportunities for students.",
+        type: "Community",
     },
     {
         role: "Campus Ambassador",
         company: "MyCaptain",
         period: "2025",
         description: "Leading marketing initiatives and student community engagement as a Campus Ambassador for MyCaptain.",
+        type: "Leadership",
     },
     {
         role: "Campus Representative",
         company: "Pregrad",
         period: "2025",
         description: "Representing Pregrad as a Campus Ambassador Intern, focusing on student outreach and career acceleration initiatives.",
+        type: "Leadership",
     },
     {
         role: "Sponsorship Co-Lead",
-        company: "Google Developers Group on Campus SUI Indore",
-        period: "2024 - 2025",
+        company: "GDG on Campus SUI Indore",
+        period: "2024 — 2025",
         description: "Leading sponsorship initiatives, managing relations with partners, and securing resources for community events and technical workshops.",
+        type: "Community",
     },
     {
-        role: "Full Stack Development with Next js & DSA",
+        role: "Full Stack Dev & DSA",
         company: "Technical Skill Enhancement",
         period: "Ongoing",
-        description: "Currently focusing on mastering the Full stack and strengthening Data Structures and Algorithms proficiency.",
+        description: "Currently mastering the full stack and strengthening Data Structures & Algorithms proficiency through consistent practice and project building.",
+        type: "Learning",
     },
 ];
 
+const ExpRow = ({ exp, index }) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.07 }}
+        >
+            <button
+                onClick={() => setOpen(!open)}
+                className="exp-row w-full text-left px-0 py-5 md:py-6 flex items-start md:items-center justify-between gap-6 group"
+            >
+                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 flex-1 min-w-0">
+                    <span className="meta-line tabular-nums shrink-0 w-6">
+                        {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    <h3
+                        className="text-2xl md:text-3xl font-semibold text-[var(--text-primary)] transition-colors duration-200 truncate"
+                        style={{ fontFamily: 'var(--font-serif)' }}
+                    >
+                        {exp.role}
+                    </h3>
+
+                    <span className="text-sm text-[var(--text-secondary)] shrink-0">
+                        {exp.company}
+                    </span>
+                </div>
+
+                <div className="flex items-center gap-4 shrink-0">
+                    <span className="hidden md:block meta-line">
+                        {exp.period}
+                    </span>
+                    <span
+                        className="hidden md:block text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 border"
+                        style={{
+                            borderColor: 'var(--line)',
+                            color: 'var(--text-secondary)',
+                            fontFamily: 'var(--font-mono)',
+                        }}
+                    >
+                        {exp.type}
+                    </span>
+                    <FaChevronDown
+                        size={12}
+                        className={`text-[var(--text-secondary)] transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+                    />
+                </div>
+            </button>
+
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="overflow-hidden"
+                    >
+                        <div className="pb-6 pl-0 md:pl-14 flex flex-col md:flex-row gap-6">
+                            <p className="leading-relaxed text-base max-w-2xl">
+                                {exp.description}
+                            </p>
+                            <div className="flex md:hidden items-center gap-3 flex-wrap">
+                                <span className="meta-line">{exp.period}</span>
+                                <span
+                                    className="text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 border"
+                                    style={{ borderColor: 'var(--line)', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}
+                                >{exp.type}</span>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    );
+};
+
 const Experience = () => {
     return (
-        <section id="experience" className="py-32 bg-[var(--bg-primary)]">
-            <div className="container mx-auto px-6">
+        <section id="experience" className="py-24 md:py-32 border-b border-[var(--line)]">
+            <div className="max-w-6xl mx-auto px-6 md:px-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-20"
+                    transition={{ duration: 0.6 }}
+                    className="mb-12 md:mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tighter">
-                        Career <span className="text-[var(--text-primary)]">Journey.</span>
-                    </h2>
-                    <p className="text-[var(--text-secondary)] text-lg font-light max-w-xl mx-auto">
-                        Mapping my involvement in technical communities and leadership roles.
+                    <div>
+                        <span className="section-label">02 — Experience</span>
+                        <h2 className="section-title">
+                            Roles, communities,
+                            <br />
+                            and continuous learning.
+                        </h2>
+                    </div>
+                    <p className="max-w-xs text-sm leading-relaxed">
+                        Community involvement, leadership roles, and ongoing skill development.
                     </p>
                 </motion.div>
 
-                <div className="max-w-3xl mx-auto">
-                    {experiences.map((exp, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="relative pl-10 pb-12 border-l-2 border-[var(--card-border)] last:border-0 last:pb-0"
-                        >
-                            {/* Dot indicator */}
-                            <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-black dark:bg-white border-4 border-[var(--bg-primary)]" />
-
-                            <div className="card-minimal hover:border-black/30 dark:hover:border-white/30 p-6"> {/* Added p-6 for consistent padding */}
-                                <span className="text-[var(--text-primary)] text-xs font-bold uppercase tracking-[0.2em] mb-2 block opacity-60">
-                                    {exp.period}
-                                </span>
-                                <h3 className="text-2xl font-bold mb-1 tracking-tight">{exp.role}</h3>
-                                <p className="text-[var(--text-primary)] font-medium mb-4 opacity-70">
-                                    {exp.company}
-                                </p>
-                                <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-light">
-                                    {exp.description}
-                                </p>
-                            </div>
-                        </motion.div>
+                <div className="border-t border-[var(--line)] paper-block px-5 md:px-7">
+                    {experiences.map((exp, i) => (
+                        <ExpRow key={i} exp={exp} index={i} />
                     ))}
                 </div>
             </div>
